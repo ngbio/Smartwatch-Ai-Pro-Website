@@ -235,7 +235,7 @@ frontend/dist/
 frontend/.cache/
 
 # Package manager
-package-lock.json
+yarn.lock
 
 # OS files
 .DS_Store
@@ -246,3 +246,4 @@ Thumbs.db
 .codex/
 .vscode/
 Dental-Clinic-Project/
+.tmp-event-booking-platform/
