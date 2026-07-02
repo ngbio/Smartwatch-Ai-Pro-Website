@@ -1,17 +1,13 @@
-from pathlib import Path
-import sys
-
-try:
-    from backend import app
-    from backend.routes import api
-except ModuleNotFoundError:
-    sys.path.append(str(Path(__file__).resolve().parent.parent))
-    from backend import app
-    from backend.routes import api
+from backend import app
+from backend.routes.chatbot_routes import chatbot_bp
+from backend.routes.product_routes import product_bp
+from backend.routes.subscriber_routes import subscriber_bp
 
 
 def register_api():
-    app.register_blueprint(api, url_prefix="/api")
+    app.register_blueprint(product_bp)
+    app.register_blueprint(subscriber_bp)
+    app.register_blueprint(chatbot_bp)
 
 
 if __name__ == "__main__":
