@@ -1,9 +1,33 @@
 import os
+from pathlib import Path
 from urllib.parse import quote_plus
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
+def load_env():
+    env_paths = [
+        Path(__file__).resolve().parent.parent / ".env",
+        Path(__file__).resolve().parent / ".env",
+    ]
+
+    for env_path in env_paths:
+        if not env_path.exists():
+            continue
+
+        with open(env_path, encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+
+                key, value = line.split("=", 1)
+                os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_env()
 
 app = Flask(__name__)
 

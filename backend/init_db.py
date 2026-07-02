@@ -1,12 +1,12 @@
 try:
-    from backend import app, db
+    from backend import AIVEN_DB_HOST, AIVEN_DB_NAME, app, db
     from backend.models import ChatMessage, Feature, Product, Specification, Subscriber
 except ModuleNotFoundError:
     from pathlib import Path
     import sys
 
     sys.path.append(str(Path(__file__).resolve().parent.parent))
-    from backend import app, db
+    from backend import AIVEN_DB_HOST, AIVEN_DB_NAME, app, db
     from backend.models import ChatMessage, Feature, Product, Specification, Subscriber
 
 
@@ -188,9 +188,15 @@ def create_sample_data():
 
 def init_db():
     with app.app_context():
+        print(f"Using database: {AIVEN_DB_NAME} on {AIVEN_DB_HOST}")
         db.create_all()
         create_sample_data()
         db.session.commit()
+        print(f"Products: {Product.query.count()}")
+        print(f"Features: {Feature.query.count()}")
+        print(f"Specifications: {Specification.query.count()}")
+        print(f"Subscribers: {Subscriber.query.count()}")
+        print(f"Chat messages: {ChatMessage.query.count()}")
 
 
 if __name__ == "__main__":
