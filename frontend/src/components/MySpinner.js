@@ -1,9 +1,7 @@
-import { Spinner } from "react-bootstrap";
-
 function MySpinner() {
   return (
-    <div className="text-center my-3">
-      <Spinner animation="border" variant="info" />
+    <div className="spinner-wrap" role="status" aria-live="polite" aria-label="Loading">
+      <span className="spinner-ring"></span>
     </div>
   );
 }
