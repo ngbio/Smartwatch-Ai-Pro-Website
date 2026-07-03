@@ -230,8 +230,3 @@ Cần bổ sung khi nộp:
 - Link backend deploy nếu có.
 - Ảnh chụp điểm Google PageSpeed Insights.
 - Minh chứng các phần điểm cộng đã làm.
-
-## Ghi chú
-
-- Frontend không dùng ảnh mặc định local cho product; ảnh sản phẩm lấy từ database/API.
-- Nếu trang local báo chưa tải được dữ liệu sản phẩm, kiểm tra backend đã chạy tại `http://localhost:5000/api` và database đã được init chưa.
