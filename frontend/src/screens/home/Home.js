@@ -1,19 +1,18 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
+import Chatbot from "../../components/Chatbot";
+import Features from "../../components/Features";
 import Hero from "../../components/Hero";
 import MySpinner from "../../components/MySpinner";
+import Specifications from "../../components/Specifications";
+import SubscribeForm from "../../components/SubscribeForm";
 import useScrollReveal from "../../hooks/useScrollReveal";
 import { getProduct } from "../../services/productService";
-
-const Chatbot = lazy(() => import("../../components/Chatbot"));
-const Features = lazy(() => import("../../components/Features"));
-const Specifications = lazy(() => import("../../components/Specifications"));
-const SubscribeForm = lazy(() => import("../../components/SubscribeForm"));
 
 const Home = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [showDeferredSections, setShowDeferredSections] = useState(false);
 
     useScrollReveal();
 
@@ -37,17 +36,6 @@ const Home = () => {
     useEffect(() => {
         loadProduct();
     }, []);
-
-    useEffect(() => {
-        if (!product)
-            return undefined;
-
-        const schedule = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 800));
-        const cancel = window.cancelIdleCallback || window.clearTimeout;
-        const handle = schedule(() => setShowDeferredSections(true));
-
-        return () => cancel(handle);
-    }, [product]);
     
     if (loading && !product) {
         return <MySpinner />;
@@ -67,20 +55,16 @@ const Home = () => {
     return (
         <>
             {error && (
-                <div className="alert alert-warning mt-3" role="alert">
+                <Alert variant="warning" className="mt-3">
                     {error}
-                </div>
+                </Alert>
             )}
 
             {currentProduct && <Hero product={currentProduct} />}
-            {showDeferredSections && (
-                <Suspense fallback={null}>
-                    <Features features={currentProduct?.features || []} />
-                    <Specifications specifications={currentProduct?.specifications || []} />
-                    <SubscribeForm />
-                    <Chatbot />
-                </Suspense>
-            )}
+            <Features features={currentProduct?.features || []} />
+            <Specifications specifications={currentProduct?.specifications || []} />
+            <SubscribeForm />
+            <Chatbot />
         </>
     );
 };
