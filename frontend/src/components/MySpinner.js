@@ -1,6 +1,11 @@
-// TODO: Render a shared loading placeholder when API data is being fetched.
+import { Spinner } from "react-bootstrap";
+
 function MySpinner() {
-  return <div>Loading...</div>;
+  return (
+    <div className="text-center my-3">
+      <Spinner animation="border" variant="info" />
+    </div>
+  );
 }
 
 export default MySpinner;
