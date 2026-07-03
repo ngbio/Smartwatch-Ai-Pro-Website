@@ -11,137 +11,83 @@ except ModuleNotFoundError:
 
 
 def create_sample_product():
-    products = [
+    product_data = {
+        "name": "SmartWatch AI Pro",
+        "subtitle": "Đồng hồ AI chăm sóc sức khỏe thông minh",
+        "description": "Theo dõi sức khỏe, luyện tập và giấc ngủ bằng AI.",
+        "price": 3990000,
+        "image": "https://res.cloudinary.com/dprwsgoeg/image/upload/v1783053621/ChatGPT_Image_Jul_3_2026_11_39_56_AM_dxtlr5.png",
+    }
+
+    features = [
         {
-            "product": {
-                "name": "SmartWatch AI Pro",
-                "subtitle": "Đồng hồ AI chăm sóc sức khỏe thông minh",
-                "description": "Theo dõi sức khỏe, luyện tập và giấc ngủ bằng AI.",
-                "price": 3990000,
-                "image": "/images/watch.png",
-            },
-            "features": [
-                {
-                    "title": "AI Health Tracking",
-                    "description": "Theo dõi sức khỏe bằng AI theo thời gian thực.",
-                    "icon": "heart",
-                },
-                {
-                    "title": "GPS",
-                    "description": "Định vị chính xác khi chạy bộ, đạp xe và luyện tập ngoài trời.",
-                    "icon": "map-pin",
-                },
-                {
-                    "title": "Fast Charging",
-                    "description": "Sạc nhanh, phù hợp với lịch trình bận rộn hằng ngày.",
-                    "icon": "battery-charging",
-                },
-                {
-                    "title": "Waterproof",
-                    "description": "Chống nước chuẩn IP68 cho nhu cầu sinh hoạt hằng ngày.",
-                    "icon": "droplets",
-                },
-            ],
-            "specifications": [
-                {"name": "Màn hình", "value": "AMOLED 1.8 inch"},
-                {"name": "Pin", "value": "500mAh"},
-                {"name": "Bluetooth", "value": "5.3"},
-                {"name": "Chống nước", "value": "IP68"},
-            ],
+            "title": "AI Health Tracking",
+            "description": "Theo dõi sức khỏe bằng AI theo thời gian thực.",
+            "icon": "heart",
         },
         {
-            "product": {
-                "name": "SmartWatch Sport X",
-                "subtitle": "Đồng hồ thể thao GPS cho luyện tập ngoài trời",
-                "description": "Theo dõi bài tập, nhịp tim và quãng đường với GPS chính xác.",
-                "price": 2990000,
-                "image": "/images/watch-sport.png",
-            },
-            "features": [
-                {
-                    "title": "Sport Mode",
-                    "description": "Hỗ trợ nhiều chế độ luyện tập như chạy bộ, đạp xe và bơi.",
-                    "icon": "activity",
-                },
-                {
-                    "title": "GPS Tracking",
-                    "description": "Ghi lại cung đường và tốc độ luyện tập.",
-                    "icon": "map",
-                },
-                {
-                    "title": "Heart Rate",
-                    "description": "Theo dõi nhịp tim liên tục khi vận động.",
-                    "icon": "heart-pulse",
-                },
-            ],
-            "specifications": [
-                {"name": "Màn hình", "value": "TFT 1.6 inch"},
-                {"name": "Pin", "value": "420mAh"},
-                {"name": "Bluetooth", "value": "5.2"},
-                {"name": "Chống nước", "value": "5ATM"},
-            ],
+            "title": "GPS",
+            "description": "Định vị chính xác khi chạy bộ, đạp xe và luyện tập ngoài trời.",
+            "icon": "map-pin",
         },
         {
-            "product": {
-                "name": "SmartWatch Mini",
-                "subtitle": "Đồng hồ thông minh nhỏ gọn cho sử dụng hằng ngày",
-                "description": "Thiết kế nhẹ, dễ đeo, phù hợp theo dõi sức khỏe cơ bản.",
-                "price": 1990000,
-                "image": "/images/watch-mini.png",
-            },
-            "features": [
-                {
-                    "title": "Sleep Tracking",
-                    "description": "Theo dõi giấc ngủ và gợi ý cải thiện thói quen nghỉ ngơi.",
-                    "icon": "moon",
-                },
-                {
-                    "title": "Notification",
-                    "description": "Nhận thông báo cuộc gọi, tin nhắn và ứng dụng.",
-                    "icon": "bell",
-                },
-                {
-                    "title": "Lightweight",
-                    "description": "Thiết kế nhỏ gọn, thoải mái khi đeo cả ngày.",
-                    "icon": "watch",
-                },
-            ],
-            "specifications": [
-                {"name": "Màn hình", "value": "AMOLED 1.4 inch"},
-                {"name": "Pin", "value": "300mAh"},
-                {"name": "Bluetooth", "value": "5.0"},
-                {"name": "Chống nước", "value": "IP67"},
-            ],
+            "title": "Fast Charging",
+            "description": "Sạc nhanh, phù hợp với lịch trình bận rộn hằng ngày.",
+            "icon": "battery-charging",
+        },
+        {
+            "title": "Waterproof",
+            "description": "Chống nước chuẩn IP68 cho nhu cầu sinh hoạt hằng ngày.",
+            "icon": "droplets",
         },
     ]
 
-    main_product = None
+    specifications = [
+        {"name": "Màn hình", "value": "AMOLED 1.8 inch"},
+        {"name": "Pin", "value": "500mAh"},
+        {"name": "Bluetooth", "value": "5.3"},
+        {"name": "Chống nước", "value": "IP68"},
+    ]
 
-    for item in products:
-        product_data = item["product"]
-        product = Product.query.filter(Product.name == product_data["name"]).first()
+    product = Product.query.filter(Product.name == product_data["name"]).first()
 
-        if product is None:
-            product = Product(**product_data)
-            db.session.add(product)
-            db.session.flush()
+    if product is None:
+        product = Product(**product_data)
+        db.session.add(product)
+        db.session.flush()
+    else:
+        product.subtitle = product_data["subtitle"]
+        product.description = product_data["description"]
+        product.price = product_data["price"]
+        product.image = product_data["image"]
 
-            features = [
-                Feature(product_id=product.id, **feature)
-                for feature in item["features"]
-            ]
-            specifications = [
-                Specification(product_id=product.id, **specification)
-                for specification in item["specifications"]
-            ]
+    Feature.query.filter(Feature.product_id == product.id).delete()
+    Specification.query.filter(Specification.product_id == product.id).delete()
 
-            db.session.add_all(features)
-            db.session.add_all(specifications)
+    db.session.add_all([Feature(product_id=product.id, **feature) for feature in features])
+    db.session.add_all(
+        [
+            Specification(product_id=product.id, **specification)
+            for specification in specifications
+        ]
+    )
 
-        if product.name == "SmartWatch AI Pro":
-            main_product = product
+    return product
 
-    return main_product
+
+def remove_extra_products(main_product):
+    extra_products = Product.query.filter(Product.id != main_product.id).all()
+
+    for product in extra_products:
+        Feature.query.filter(Feature.product_id == product.id).delete()
+        Specification.query.filter(Specification.product_id == product.id).delete()
+        Subscriber.query.filter(Subscriber.product_id == product.id).update(
+            {"product_id": main_product.id}
+        )
+        ChatMessage.query.filter(ChatMessage.product_id == product.id).update(
+            {"product_id": main_product.id}
+        )
+        db.session.delete(product)
 
 
 def create_sample_subscribers(product):
@@ -182,6 +128,7 @@ def create_sample_chat_history(product):
 
 def create_sample_data():
     product = create_sample_product()
+    remove_extra_products(product)
     create_sample_subscribers(product)
     create_sample_chat_history(product)
 

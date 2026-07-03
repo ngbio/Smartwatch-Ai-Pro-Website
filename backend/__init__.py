@@ -3,6 +3,7 @@ from pathlib import Path
 from urllib.parse import quote_plus
 
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -30,6 +31,7 @@ def load_env():
 load_env()
 
 app = Flask(__name__)
+CORS(app)
 
 app.secret_key = os.environ.get("SECRET_KEY", "change-this-secret-key")
 

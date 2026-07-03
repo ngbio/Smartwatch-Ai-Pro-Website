@@ -10,6 +10,8 @@ def register_api():
     app.register_blueprint(chatbot_bp)
 
 
+register_api()
+
+
 if __name__ == "__main__":
-    register_api()
     app.run(debug=True)
