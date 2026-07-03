@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
 import { buildCloudinarySrcSet, optimizeCloudinaryImage } from "../utils/imageUrl";
 
 function Hero({ product }) {
@@ -31,14 +30,15 @@ function Hero({ product }) {
 
   return (
     <section className="hero-panel">
-      <Row className="align-items-center justify-content-center g-5">
-        <Col lg={8} className="hero-copy text-center">
+      <div className="row align-items-center justify-content-center g-5">
+        <div className="col-lg-8 hero-copy text-center">
           <div className="hero-badge">AI Wearable</div>
           <h1>{product.name}</h1>
           <p className="lead">{product.subtitle}</p>
           <p className="hero-description">{product.description}</p>
-        </Col>
-        <Col lg={9}>
+        </div>
+
+        <div className="col-lg-9">
           <div className="product-showcase hero-showcase">
             <div className="hero-radial-glow"></div>
             <div className="hero-glass-orbit"></div>
@@ -75,8 +75,8 @@ function Hero({ product }) {
               <strong>{product.price}</strong>
             </div>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </section>
   );
 }

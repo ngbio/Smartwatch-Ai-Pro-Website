@@ -2,7 +2,7 @@ export function optimizeCloudinaryImage(url, width = 640) {
   if (!url || !url.includes("res.cloudinary.com") || !url.includes("/upload/"))
     return url || "";
 
-  const transform = `f_auto,q_auto:eco,w_${width},c_fill,g_auto`;
+  const transform = `f_auto,q_auto:eco,dpr_auto,w_${width},c_fill,g_auto`;
   return url.replace("/upload/", `/upload/${transform}/`);
 }
 

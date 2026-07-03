@@ -50,12 +50,12 @@ body[data-theme="light"] {
   z-index: 1040;
   background: var(--page-bg);
   border-bottom: 1px solid var(--border-soft);
-  backdrop-filter: blur(18px);
 }
 
 .site-navbar .navbar-brand,
 .site-navbar .nav-link {
   color: var(--text-main);
+  text-decoration: none;
 }
 
 .site-navbar .nav-link:hover {
@@ -66,6 +66,24 @@ body[data-theme="light"] {
   margin-left: 1rem;
   border-radius: 999px;
   font-weight: 700;
+}
+
+.header-nav,
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.header-nav {
+  min-height: 64px;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-links {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem 1rem;
 }
 
 .main-container {
@@ -84,7 +102,6 @@ body[data-theme="light"] {
   background: var(--hero-bg);
   box-shadow: var(--shadow-strong);
   isolation: isolate;
-  animation: heroFadeUp 0.8s ease both;
 }
 
 .hero-panel::before,
@@ -102,7 +119,6 @@ body[data-theme="light"] {
   top: -18%;
   left: 50%;
   background: rgba(103, 232, 249, 0.14);
-  filter: blur(54px);
   transform: translateX(-50%);
 }
 
@@ -112,7 +128,6 @@ body[data-theme="light"] {
   right: -12%;
   bottom: -18%;
   background: rgba(14, 116, 144, 0.22);
-  filter: blur(62px);
 }
 
 .hero-panel h1 {
@@ -176,7 +191,6 @@ body[data-theme="light"] {
     radial-gradient(circle at 50% 35%, rgba(103, 232, 249, 0.24), transparent 30%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
   box-shadow: var(--shadow-strong);
-  backdrop-filter: blur(22px);
 }
 
 .hero-showcase {
@@ -198,7 +212,6 @@ body[data-theme="light"] {
   border-radius: 999px;
   background:
     radial-gradient(circle, rgba(103, 232, 249, 0.52) 0%, rgba(34, 211, 238, 0.24) 34%, rgba(14, 116, 144, 0.06) 58%, transparent 72%);
-  filter: blur(14px);
   transform: translateY(2%);
 }
 
@@ -214,7 +227,6 @@ body[data-theme="light"] {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
     0 34px 90px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(16px);
 }
 
 .hero-product-layer {
@@ -233,7 +245,6 @@ body[data-theme="light"] {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.12),
     0 26px 60px rgba(0, 0, 0, 0.28);
-  animation: productFloat 5.5s ease-in-out infinite;
 }
 
 .detail-showcase {
@@ -293,7 +304,6 @@ body[data-theme="light"] {
   background: rgba(15, 23, 42, 0.68);
   color: #f8fafc;
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(18px);
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
@@ -321,20 +331,17 @@ body[data-theme="light"] {
 .chip-health {
   right: 8%;
   bottom: 16%;
-  animation: chipFloat 5.8s ease-in-out infinite;
 }
 
 .chip-battery {
   top: 18%;
   left: 9%;
-  animation: chipFloat 6.4s ease-in-out infinite 0.4s;
 }
 
 .chip-price {
   left: 50%;
   bottom: 6%;
   transform: translateX(-50%);
-  animation: chipPriceFloat 6s ease-in-out infinite 0.2s;
 }
 
 .section-block {
@@ -594,10 +601,33 @@ body[data-theme="light"] {
 }
 
 .footer-alert {
+  padding: 1rem;
   border: 0;
   border-radius: 1.25rem;
   background: var(--surface-strong);
   color: var(--text-muted);
+}
+
+.spinner-wrap {
+  display: flex;
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-ring {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.25rem solid rgba(103, 232, 249, 0.22);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  animation: spinnerRotate 0.8s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .reveal {
@@ -681,6 +711,17 @@ body[data-theme="dark"] .list-group-item {
     width: fit-content;
     margin-top: 0.75rem;
     margin-left: 0;
+  }
+
+  .header-nav {
+    min-height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: 0.75rem;
+  }
+
+  .header-links {
+    justify-content: flex-start;
   }
 
   .hero-panel {
