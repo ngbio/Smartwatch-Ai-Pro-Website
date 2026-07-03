@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { buildCloudinarySrcSet, optimizeCloudinaryImage } from "../utils/imageUrl";
 
 function Hero({ product }) {
   const [imageError, setImageError] = useState(false);
   const productImage = product.image || product.image_url || "";
+  const optimizedProductImage = optimizeCloudinaryImage(productImage, 640);
+  const productImageSrcSet = buildCloudinarySrcSet(productImage, [320, 480, 640]);
   const shouldShowProductImage = productImage && !imageError;
   const specifications = product.heroSpecifications || [];
 
@@ -27,7 +30,7 @@ function Hero({ product }) {
   }, [productImage]);
 
   return (
-    <section className="hero-panel reveal">
+    <section className="hero-panel">
       <Row className="align-items-center justify-content-center g-5">
         <Col lg={8} className="hero-copy text-center">
           <div className="hero-badge">AI Wearable</div>
@@ -43,8 +46,14 @@ function Hero({ product }) {
               <div className="hero-product-layer">
                 <img
                   className="hero-product-image"
-                  src={productImage}
+                  src={optimizedProductImage}
+                  srcSet={productImageSrcSet || undefined}
+                  sizes="(max-width: 576px) 230px, 430px"
                   alt={product.name}
+                  width="430"
+                  height="430"
+                  fetchPriority="high"
+                  decoding="async"
                   onError={() => setImageError(true)}
                 />
               </div>
