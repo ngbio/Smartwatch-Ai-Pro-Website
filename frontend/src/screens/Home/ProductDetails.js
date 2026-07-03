@@ -6,6 +6,7 @@ import MySpinner from "../../components/MySpinner";
 import Specifications from "../../components/Specifications";
 import useScrollReveal from "../../hooks/useScrollReveal";
 import { getProduct } from "../../services/productService";
+import { buildCloudinarySrcSet, optimizeCloudinaryImage } from "../../utils/imageUrl";
 
 const ProductDetails = () => {
     const [product, setProduct] = useState(null);
@@ -60,6 +61,8 @@ const ProductDetails = () => {
         image: product.image || "",
         image_url: product.image_url || "",
     };
+    const optimizedProductImage = optimizeCloudinaryImage(productImage, 480);
+    const productImageSrcSet = buildCloudinarySrcSet(productImage, [240, 360, 480]);
 
     return (
         <main className="product-page">
@@ -79,7 +82,13 @@ const ProductDetails = () => {
                                             <img
                                                 alt={currentProduct.name}
                                                 className="hero-product-image detail-product-image"
-                                                src={productImage}
+                                                src={optimizedProductImage}
+                                                srcSet={productImageSrcSet || undefined}
+                                                sizes="(max-width: 576px) 210px, 280px"
+                                                width="280"
+                                                height="280"
+                                                loading="lazy"
+                                                decoding="async"
                                                 onError={() => setImageError(true)}
                                             />
                                         </div>
