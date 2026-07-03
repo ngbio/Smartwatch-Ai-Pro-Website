@@ -11,8 +11,8 @@ DEFAULT_PRODUCT = {
     "subtitle": "Đồng hồ AI chăm sóc sức khỏe thông minh",
     "description": "Theo dõi sức khỏe, luyện tập và giấc ngủ bằng AI.",
     "price": "3.990.000đ",
-    "image": "/smartwatch.jpg",
-    "image_url": "/smartwatch.jpg",
+    "image": "",
+    "image_url": "",
     "features": [
         {
             "title": "AI Health Tracking",

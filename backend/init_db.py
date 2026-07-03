@@ -47,6 +47,8 @@ def create_sample_product():
         {"name": "Pin", "value": "500mAh"},
         {"name": "Bluetooth", "value": "5.3"},
         {"name": "Chống nước", "value": "IP68"},
+        {"name": "Health Score", "value": "98%"},
+        {"name": "Battery", "value": "500mAh"},
     ]
 
     product = Product.query.filter(Product.name == product_data["name"]).first()

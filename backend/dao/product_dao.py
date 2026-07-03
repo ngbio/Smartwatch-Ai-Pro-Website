@@ -25,6 +25,7 @@ def get_product_detail():
         "subtitle": product.subtitle,
         "description": product.description,
         "price": format_price(product.price),
+        "image": product.image,
         "image_url": product.image,
         "features": [feature_to_dict(f) for f in product.features],
         "specifications": [specification_to_dict(s) for s in product.specifications],
